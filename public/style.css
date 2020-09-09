@@ -1,0 +1,301 @@
+body {
+    margin: 0px;
+    background-color: black;
+    cursor: grab;
+}
+
+#maincontainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+    padding: 5px;
+    border: 5px solid #4290f5;
+    background-color: rgb(8, 146, 3);
+    color: white;
+    text-align: center;
+    font-family: Blinker;
+    overflow: hidden;
+}
+
+#friends_box, #hi_sc_box {
+    position: absolute;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #2196F3;
+    bottom: 100%;
+}
+
+#close_box, #hi_sc_close_box {
+    color: red;
+    font-size: 5vh;
+    position: absolute;
+    right: 10px;
+    top: -5px;
+}
+
+.hd1 {
+    font-size: 10vh;
+    color: blue;
+    text-align: center;
+    font-family: Bangers;
+}
+
+.hd2 {
+    font-size: 25px;
+    color: rgb(179, 5, 5);
+    text-align: center;
+    font-family: Coiny;
+    border: 2px solid blue;
+    border-radius: 10px;
+    margin: 3vh;
+    background-color: #FF9800;
+    padding: 1vh;
+}
+
+#players_lst {
+    float: left;
+    width: 90%;
+    border: 2px solid red;
+    margin: 1vh;
+    border-radius: 5px;
+    padding: 10px;
+    height: 30vh;
+    overflow: scroll;
+}
+
+#p_on_mat {
+    float: left;
+    margin: 2vh;
+}
+
+.span_free {
+    float: left;
+    margin: 0.5vh;
+    padding: 0.5vh;
+    border: 2px solid greenyellow;
+    border-radius: 5px;
+}
+
+.span_inv {
+    border-color: blue;
+}
+
+.op {
+    position: absolute;
+    width: 10%;
+    border: 2px solid green;
+    border-radius: 10px;
+    top: 80%;
+    font-size: 8vh;
+}
+
+#i1 {
+    left: 7.5%;
+}
+
+#i2 {
+    left: 22.5%;
+}
+
+#i3 {
+    left: 37.5%;
+}
+
+#i4 {
+    left: 52.5%;
+}
+
+#i5 {
+    left: 67.5%;
+}
+
+#i6 {
+    left: 82.50%;
+}
+
+#stat {
+    padding: 5px;
+    position: absolute;
+    width: 70%;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #dffc03;
+    font-size: 20px;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.an1, .an2 {
+    width: 45%;
+    position: absolute;
+    top: 45%;
+}
+
+.an1 {
+    left: 100%;
+}
+
+.an2 {
+    right: 100%;
+}
+
+#r5, #r6, #l5, #l6 {
+    top: 40%;
+}
+
+#i_tag, #j_tag {
+    padding: 5px;
+    position: absolute;
+    top: 5%;
+    border-radius: 5px;
+    width: 30%;
+    height: 3%
+}
+
+#i_tag {
+    right: 5%;
+    border: 3px solid purple;
+}
+
+#j_tag {
+    left: 5%;
+    border: 3px solid blue;
+}
+
+#bat_img, #bowl_img {
+    padding: 5px;
+    position: absolute;
+    top: 12%;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
+}
+
+#rnd_cnt, #run_score, #target {
+    padding: 5px;
+    position: absolute;
+    border: 3px solid #32a8a8;
+    border-radius: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#rnd_cnt {
+    top: 12%;
+    font-size: 2vh;
+}
+
+#run_score {
+    top: 18%;
+    font-size: 7vh;
+}
+
+#target {
+    top: 31%;
+    font-size: 3vh;
+}
+
+#inn_alert, #inv_alert, #inv_conf, #win_alert, #toss_alert, #name_prompt {
+    z-index: 1;
+    position: absolute;
+    background-color: #c9002f;
+    width: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border: 5px solid blue;
+    border-radius: 20px;
+}
+
+#inv_alert, #inv_conf {
+    bottom: 100%;
+}
+
+#inn_tag1, #inn_tag2, #win_tag, #inv_tag1, #alert_tag1 {
+    font-size: 25px;
+    color: lightgreen;
+}
+
+#toss_tag1, #toss_tag2, #toss_tag3, #toss_call_opp, #toss_res, #toss_choice_opp {
+    font-size: 3vh;
+    color: #FFEB3B;
+}
+
+#win_name, #inv_tag2, #inv_res {
+    font-size: 30px;
+    color: indigo;
+}
+
+#inn_score {
+    font-size: 10vh;
+    color: indigo
+}
+
+#inn_btn, #rpl_btn, #qt_btn, #toss_hd, #toss_tl, #toss_bt, #toss_bw, #name_btn, #inv_acp_btn, #inv_dec_btn {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid #00c940;
+    background-color: orange;
+    color: black;
+    border-radius: 5px;
+}
+
+#invite {
+    padding: 5px;
+    border: 2px solid green;
+    float: right;
+    border-radius: 10px;
+}
+
+#pl_bot {
+    left: 10%;
+    position: absolute;
+    width: 20%;
+    padding: 2px;
+    margin: 15px;
+    border: 2px solid lightgreen;
+    background-color: red;
+    border-radius: 10px;
+}
+
+#hi_sc_tbl {
+    margin:auto;
+    border-collapse: collapse;
+    color: yellow;
+    border-radius: 10px;
+}
+
+#hi_sc_box {
+    z-index: 2;
+}
+
+.a td {
+    text-align: center;
+    border: 2px solid #0e29f0;
+    padding: 4px;
+    background-color: #fa071c;
+    color: #f2fa07;
+    font-family: Bungee;
+    font-size: 15px;
+}
+
+.b td {
+    border: 2px solid #0e29f0;
+    text-align: center;
+    padding: 4px;
+    background-color: #fa071c;
+    color: #1dfa05;
+    font-family: Aldrich;
+    font-size: 15px;
+}
+
+#players_lst::-webkit-scrollbar {
+    display: none;
+}

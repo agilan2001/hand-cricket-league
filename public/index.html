@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta
+  name="description"           
+  content="Play Hand Cricket 👍 with your FRIENDS from anywhere...">
+  
+  <link rel="icon" href="favicon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Blinker" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>HAND CRICKET LEAGUE</title>
+  <!-- update the version number as needed -->
+  <script src="/__/firebase/7.17.1/firebase-app.js"></script>
+
+  <script src="/__/firebase/7.17.1/firebase-database.js"></script>
+
+  <script src="/__/firebase/init.js"></script>
+</head>
+
+<body>
+  <div id="maincontainer">
+    <span id="hi_sc_box">
+      <span id="hi_sc_close_box" onclick="close_hi_sc()">&times</span>
+      <span style="font-size: 5vh;"><b>HIGH SCORES</b></span><br>
+      <table id="hi_sc_tbl"></table>
+    </span>
+    <span id="main">
+      <span id="name_prompt">
+        <span id="prompt_tag1">Enter your NAME :</span><br><br>
+        <input type="text" id="name_box"><br><br>
+        <span id="name_btn" onclick="name_enter()">That's my NAME</span>
+      </span>
+      <span id="inv_alert">
+        <span id="alert_tag1">Waiting for Response</span><br><br>
+        <span id="inv_res">O O O</span>
+      </span>
+      <span id="inv_conf">
+        <span id="inv_tag1">Accept INVITE from</span><br>
+        <span id="inv_tag2">asd</span><br>
+        <br>
+        <span id="inv_acp_btn" onclick="inv_acp()">ACCEPT</span> <span id="inv_dec_btn"
+          onclick="inv_dec()">DECLINE</span>
+      </span>
+      <div class="hd1">HAND<br>
+        CRICKET<br>
+        LEAGUE</div>
+      <div class="hd2" onclick="open_friends()">PLAY with<br>FRIENDS</div>
+      <div class="hd2" onclick="act_bot()">PLAY with<br>BOT</div>
+      <div class="hd2" onclick="hi_sc_show()">HIGH<br>SCORES</div>
+      <span id="friends_box">
+        <span id="close_box" onclick="close_friends()">&times</span>
+        <span>SEARCH : <input id="search_box" type="text" oninput="search()"><br></span>
+        <span id="players_lst"></span>
+        <span id="p_on_mat">Players BUSY: </span>
+        <span id="invite"><u>INVITE FRIENDS</u><br>
+          <img src="res/whatsapp.png"
+            onclick="location.href='https://api.whatsapp.com/send?text=Let\'s See who wins me in Hand-Cricket...%0Ahttps://hand-cricket-agiapp.web.app/'">&nbsp;
+          <img src="res/message_small.png"
+            onclick="location.href='sms:?&amp;body=Let\'s See who wins me in Hand-Cricket...%0Ahttps://hand-cricket-agiapp.web.app/'"></span>
+      </span>
+
+
+
+    </span>
+
+    <span id="game" style="display: none;">
+      <span id="toss_alert">
+        <span id="toss_tag1">TIME for TOSS<br>
+          <hr></span>
+        <span id="toss_call">
+          <span id="toss_tag2">Make your CALL...<br><br></span>
+          <span id="toss_hd" onclick="toss_head()">HEADS</span> <span id="toss_tl"
+            onclick="toss_tail()">TAILS</span><br><br>
+          <hr></span>
+        <span id="toss_call_opp">XXX Calls HEADS<br>
+          <hr></span>
+        <img id="toss_coin_head" src="res/toss_head.png"><img id="toss_coin_tail" src="res/toss_tail.png">
+        <span id="toss_res"><br>
+          <hr>XXX Won the toos<br>
+          <hr></span>
+        <span id="toss_choice">
+          <span id="toss_tag3">CHOOSE</span><br><br>
+          <span id="toss_bt" onclick="toss_bat()">BAT</span>
+          <span id="toss_bw" onclick="toss_bowl()">BOWL</span><br><br>
+          <hr>
+        </span>
+        <span id="toss_choice_opp">XXX chose to BAT
+          <hr></span>
+      </span>
+
+      <span id="win_alert"> <span id="win_tag">WINNER</span><br>
+        <span id="win_name">asd</span><br>
+        <br>
+        <span id="rpl_btn" onclick="replay()">REPLAY</span> <span id="qt_btn" onclick="lobby()">LOBBY</span>
+      </span>
+
+      <span id="inn_alert">
+        <span id="inn_tag1">Need to restrict within</span><br>
+        <span id="inn_score">25</span><br>
+        <span id="inn_tag2">runs to WIN...</span><br>
+        <br>
+        <span id="inn_btn" onclick="inn()">BOWL</span>
+      </span>
+
+
+      <span id="i_tag">Name1</span>
+      <span id="j_tag">Name2</span>
+      <img id="bat_img" src="res/bat.png">
+      <img id="bowl_img" src="res/bowl.png">
+      <span id="rnd_cnt">INNINGS: I</span>
+      <span id="run_score">55</span>
+      <span id="target">55</span>
+      <span id="stat">Make your<br>CHOICE</span>
+      <span id="i1" class="op" onclick="s(1)">1</span>
+      <span id="i2" class="op" onclick="s(2)">2</span>
+      <span id="i3" class="op" onclick="s(3)">3</span>
+      <span id="i4" class="op" onclick="s(4)">4</span>
+      <span id="i5" class="op" onclick="s(5)">5</span>
+      <span id="i6" class="op" onclick="s(6)">6</span>
+      <img id="r1" class="an1" src="res/r1.png">
+      <img id="r2" class="an1" src="res/r2.png">
+      <img id="r3" class="an1" src="res/r3.png">
+      <img id="r4" class="an1" src="res/r4.png">
+      <img id="r5" class="an1" src="res/r5.png">
+      <img id="r6" class="an1" src="res/r6.png">
+
+      <img id="l1" class="an2" src="res/l1.png">
+      <img id="l2" class="an2" src="res/l2.png">
+      <img id="l3" class="an2" src="res/l3.png">
+      <img id="l4" class="an2" src="res/l4.png">
+      <img id="l5" class="an2" src="res/l5.png">
+      <img id="l6" class="an2" src="res/l6.png">
+    </span>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!--<script src="../res/jquery.min.js"></script>-->
+
+  <!--
+<script src="../res/firebase-app.js"></script>
+<script src="../res/firebase-database.js"></script>
+-->
+  <script>
+
+    resize();
+    var name;
+    var op_name;
+    var my_sc;
+    var op_sc;
+    var rnd;
+    var mat_key;
+    var mat_key_match, mat_key_toss;
+    var invited;
+    var inv_key;
+    var inv_int;
+    var game_on;
+
+    var db = firebase.database();
+    var p_key = db.ref("pl_on").push().key;
+    var p_role;
+    var s1, s2;
+    var a_ref, b_ref, c_ref, d_ref, e_ref, f_ref;
+    var bot_mode;
+
+    var toss_1, toss_2;
+    var flag, flag1, flag2;
+
+    var k_mem;
+    var t_val, s_val;
+
+    name_box.value = ("GUY" + parseInt(Math.random() * 10000)).toUpperCase();
+    $("#name_box").select();
+    $("#name_prompt").css("bottom", "100%");
+    $("#name_prompt").animate({
+      bottom: "45%"
+    }, 500);
+
+    function name_enter() {
+      name = (name_box.value || ("GUY" + parseInt(Math.random() * 10000))).toUpperCase();
+      $("#name_prompt").animate({
+        bottom: "100%"
+      }, 500, init);
+    }
+
+    function init() {
+      bot_mode = 0;
+      game.style.display = "none";
+      main.style.display = "block";
+      game_on = 0;
+
+      p_role = 0;
+      s1 = 0; s2 = 0;
+      invited = false;
+      inv_key = 0;
+
+      $("#friends_box").css("bottom", "100%");
+      $("#hi_sc_box").css("bottom", "100%");
+      $("#win_alert").css("bottom", "100%");
+      $("#inn_alert").css("bottom", "100%");
+      $("#inv_alert").css("bottom", "100%");
+      $("#inv_conf").css("bottom", "100%");
+      $("#toss_alert").css("top", "-100%");
+
+      db.ref("pl_on/" + p_key).set({
+        name: name,
+        match: 0,
+        inv_from: 0,
+        inv_to: 0
+      });
+
+      db.ref("pl_on/" + p_key).onDisconnect().remove();
+
+      a_ref = db.ref("pl_on/" + p_key + "/inv_from").on("value", function (s) {
+        if (s.val() != 0) {
+          db.ref("pl_on/" + s.val() + "/name").once("value", function (t) {
+            if (!t.exists()) return;
+
+            inv_tag2.innerHTML = t.val();
+            $("#inv_conf").animate({
+              bottom: "40%"
+            }, 500)
+
+            t_val = t.val();
+            s_val = s.val();
+
+            db.ref("pl_on/" + p_key + "/inv_from").set(0);
+          });
+        }
+      });
+
+      b_ref = db.ref('pl_on').orderByKey().on('value', function (s) {
+        var busy = 0;
+        var pl_on_key = [];
+        var pl_on_name = [];
+
+        players_lst.innerHTML = "";
+
+        s.forEach(function fun(e) {
+          if (e.val()["name"] == null) db.ref("pl_on/" + e.key).remove();
+          if (e.key != p_key) {
+            if (e.val()["match"] == 0) {
+              pl_on_key.push(e.key);
+              pl_on_name.push(e.val()["name"]);
+            }
+            else
+              busy++;
+          }
+        });
+        for (var jk = pl_on_key.length - 1; jk >= 0; jk--) {
+          players_lst.innerHTML += `<span class="span_free${pl_on_key[jk] == inv_key ? String(' span_inv"') : String('"')} onClick='inv("${pl_on_key[jk]}");'>${pl_on_name[jk]}</span>`;
+        }
+        search();
+        p_on_mat.innerHTML = "Players BUSY: " + busy;
+      });
+    }
+
+    window.onunload = function (e) {
+      destroy();
+    };
+
+    function destroy() {
+      db.ref("pl_on/" + p_key).remove();
+    }
+
+    function inv(k) {
+      k_mem = k;
+      var check_res = setTimeout(function () {
+        db.ref("pl_on/" + p_key + "/match").once("value", function (y) {
+          if (y.val() == 0) {
+            db.ref("pl_on/" + p_key + "/inv_to").set(0);
+            clearInterval(inv_int);
+            inv_res.innerHTML = "OOPS..No Response";
+            setTimeout(function () {
+              $("#inv_alert").animate({
+                bottom: "100%"
+              }, 500);
+            }, 1000);
+            db.ref("pl_on/" + k_mem).remove();
+            invited = 0;
+            db.ref("pl_on/" + p_key + "/match").off("value", d_ref);
+            db.ref("pl_on/" + p_key + "/inv_to").off("value", c_ref);
+          };
+        });
+      }, 15000);
+
+
+      if (!invited) {
+        inv_key = k;
+        db.ref("pl_on/" + k + "/inv_from").set(p_key);
+        db.ref("pl_on/" + p_key + "/inv_to").set(1);
+        $("#inv_alert").animate({
+          bottom: "50%"
+        }, 500);
+        inv_res.innerHTML = "O ";
+        inv_int = setInterval(function () {
+          inv_res.innerHTML += "O O ";
+          if (inv_res.innerHTML == "O O O O O O O ")
+            inv_res.innerHTML = "O ";
+        }, 1000)
+        invited = true;
+
+      }
+      d_ref = db.ref("pl_on/" + p_key + "/match").on("value", function (t) {
+        if (t.val() != 0) {
+          mat_key = t.val();
+          db.ref("pl_on/" + p_key + "/match").off("value", d_ref);
+          db.ref("pl_on/" + k + "/name").once("value", function (m) {
+            op_name = m.val();
+          });
+          clearInterval(inv_int);
+          inv_res.innerHTML = "Invite Accepted";
+          setTimeout(function () {
+            $("#inv_alert").animate({
+              bottom: "100%"
+            }, 500, play);
+          }, 1000);
+        }
+      });
+      c_ref = db.ref("pl_on/" + p_key + "/inv_to").on("value", function (u) {
+        if (u.val() == -1) {
+          clearInterval(inv_int);
+          inv_res.innerHTML = "OOPS..Invite Declined";
+          setTimeout(function () {
+            $("#inv_alert").animate({
+              bottom: "100%"
+            }, 500);
+          }, 1000);
+          invited = false;
+          inv_key = 0;
+          clearTimeout(check_res);
+          db.ref("pl_on/" + p_key + "/inv_to").set(0);
+          db.ref("pl_on/" + p_key + "/match").off("value", d_ref);
+          db.ref("pl_on/" + p_key + "/inv_to").off("value", c_ref);
+
+        }
+      });
+
+    }
+    function play() {
+
+      my_sc = 0;
+      op_sc = 0;
+
+      toss_1 = 0; toss_2 = 0;
+      flag = 0; flag1 = 0; flag2 = 0;
+
+      $("#target").hide();
+
+      $("#toss_choice_opp").hide();
+      $("#toss_choice").hide();
+      $("#toss_res").hide();
+      $("#toss_call_opp").hide();
+      $("#toss_call").hide();
+      $("#toss_coin_head").hide();
+      $("#toss_coin_tail").hide();
+
+      win_tag.innerHTML = "WINNER";
+      stat.innerHTML = "Pick your CHOICE";
+
+      $("#toss_alert").animate({
+        top: "5%"
+      }, 500);
+
+      if (!bot_mode) {
+
+        db.ref("pl_on/" + p_key + "/i̥nv_to").off("value", c_ref);
+        db.ref("pl_on").off("value", b_ref);
+        db.ref("pl_on/" + p_key + "/inv_from").off("value", a_ref);
+
+        if (p_role == 0) {
+          toss_1 = parseInt(Math.random() * 4) + 1;
+          db.ref(mat_key + "/toss/t1").set(toss_1);
+          if (toss_1 == 1 || toss_1 == 2)
+            $("#toss_call").show();
+          else {
+            toss_call_opp_fun();
+          }
+        } else {
+          g_ref = db.ref(mat_key + "/toss/t1").on("value", function (k) {
+            if (k.val() == 0) {
+              toss_tag1.innerHTML = "Waiting for OPPONENT...<br><hr>";
+              return;
+            } else {
+              toss_1 = k.val();
+              db.ref(mat_key + "/toss/t1").off("value", g_ref);
+              toss_tag1.innerHTML = "Time for TOSS<br><hr>";
+              if (toss_1 == 1 || toss_1 == 2) {
+                toss_call_opp_fun();
+              } else {
+                $("#toss_call").show();
+              }
+            }
+          });
+        }
+
+      } else {
+        op_name = "BOT" + parseInt(Math.random() * 10000);
+        toss_1 = parseInt(Math.random() * 2) + 1;
+        $("#toss_call").show();
+      }
+
+
+      main.style.display = "none";
+      game.style.display = "block";
+      op_sc = 0;
+      my_sc = 0;
+      i_tag.innerHTML = name;
+      j_tag.innerHTML = op_name;
+      run_score.innerHTML = "0";
+      rnd_cnt.innerHTML = "INNINGS : I";
+    }
+    function s(g) {
+      if (!game_on) return;
+      if (s1 == 0) {
+        document.getElementById("i" + g).style.borderColor = "blue";
+        s1 = g;
+        if (bot_mode) {
+          s2 = parseInt(Math.random() * 6 + 1);
+          evlt();
+          return;
+        }
+        db.ref(mat_key + "/match/p" + p_role).set(g);
+        e_ref = db.ref(mat_key + "/match/p" + Number(!p_role)).on("value", function (k) {
+          if (k.val() == 0) {
+            stat.innerHTML = "Waiting for OPPONENT";
+            return;
+          } else {
+            s2 = k.val();
+            db.ref(mat_key + "/match/p" + Number(!p_role)).off("value", e_ref);
+            evlt();
+          }
+        });
+
+      }
+
+    }
+    function evlt() {
+      if (s1 != s2 && flag == 1) {
+        my_sc += s1;
+        run_score.innerHTML = my_sc;
+        if (flag2 == 1) {
+          if (my_sc > op_sc) {
+            game_on = 0;
+            win_name.innerHTML = name;
+            $("#win_alert").delay(1000).animate({
+              bottom: "50%"
+            }, 500);
+            check_hi_sc();
+          }
+
+        }
+      }
+
+      if (s1 != s2 && flag == 2) {
+        op_sc += s2;
+        run_score.innerHTML = op_sc;
+        if (flag1 == 1) {
+          if (op_sc > my_sc) {
+            game_on = 0;
+            win_name.innerHTML = op_name;
+            $("#win_alert").delay(1000).animate({
+              bottom: "50%"
+            }, 500);
+            check_hi_sc();
+          }
+
+        }
+      }
+
+
+
+      if (s1 == s2) {
+        if (flag1 == 0) {
+          game_on = 0;
+          flag = 1;
+          flag1 = 1;
+          inn_score.innerHTML = parseInt(op_sc + 1);
+          inn_tag1.innerHTML = 'Need to score';
+          inn_btn.innerHTML = "BAT";
+          $("#inn_alert").delay(1000).animate({
+            bottom: "50%"
+          }, 500);
+
+
+        }
+        else if (flag2 == 0) {
+          game_on = 0;
+          flag = 2;
+          flag2 = 1;
+          inn_score.innerHTML = parseInt(my_sc + 1);
+          inn_tag1.innerHTML = 'Need to restrict within';
+          inn_btn.innerHTML = "BOWL";
+          $("#inn_alert").delay(1000).animate({
+            bottom: "50%"
+          }, 500);
+
+
+        }
+
+        else if (flag1 == 1 && flag2 == 1) {
+          if (my_sc > op_sc)
+            win_name.innerHTML = name;
+          else if (my_sc < op_sc)
+            win_name.innerHTML = op_name;
+          else {
+            win_name.innerHTML = '';
+            win_tag.innerHTML = 'MATCH TIED';
+          }
+          game_on = 0;
+          $("#win_alert").delay(1000).animate({
+            bottom: "50%"
+          }, 500);
+          check_hi_sc();
+        }
+
+      }
+
+      if (!bot_mode) {
+        if (p_role == 0) {
+          db.ref(mat_key + "/match").set({
+            p0: 0,
+            p1: 0
+          });
+
+        }
+      }
+      anim(s1, s2);
+    }
+
+    function anim(t1, t2) {
+      var g1 = "#r" + t1;
+      var g2 = "#l" + t2;
+      $(g1).animate({
+        left: "55%"
+      }, 500);
+      $(g2).animate({
+        right: "55%"
+      }, 500);
+
+      $(g1).delay(1500).animate({
+        left: "100%"
+      }, 1000);
+      $(g2).delay(1500).animate({
+        right: "100%"
+      }, 1000, reset);
+
+    }
+
+    function reset() {
+      document.getElementById("i" + s1).style.borderColor = "green";
+
+      stat.innerHTML = "Pick your CHOICE";
+
+      s1 = 0; s2 = 0;
+    }
+
+    function lobby() {
+      if (bot_mode) {
+        init();
+        return;
+      }
+      db.ref(mat_key + "/match/p" + Number(!p_role)).once("value", function (q) {
+        if (q.val() == -1) {
+          db.ref(mat_key).remove();
+          init();
+        } else {
+          db.ref(mat_key + "/match/p" + p_role).set(-1);
+          init();
+        }
+      });
+
+
+    }
+
+    function replay() {
+      if (bot_mode) {
+        replay_sub();
+        return;
+      }
+
+      db.ref(mat_key + "/toss").set({
+        t1: 0,
+        t2: 0,
+        t3: 0
+      });
+
+
+      db.ref(mat_key + "/match/p" + p_role).set(9);
+      f_ref = db.ref(mat_key + "/match/p" + Number(!p_role)).on("value", function (q) {
+        if (q.val() == 0) {
+          win_tag.innerHTML = "";
+          win_name.innerHTML = "Waiting for Opponent";
+          return;
+        }
+        if (q.val() == -1) {
+          db.ref(mat_key + "/match/p" + Number(!p_role)).off("value", f_ref);
+          win_tag.innerHTML = "";
+          win_name.innerHTML = "REPLAY invite Declined";
+          setTimeout(function () {
+            db.ref(mat_key).remove();
+            init();
+          }, 2000);
+        }
+        if (q.val() == 9) {
+          db.ref(mat_key + "/match").set({
+            p0: 0,
+            p1: 0
+          });
+
+
+          db.ref(mat_key + "/match/p" + Number(!p_role)).off("value", f_ref);
+          replay_sub();
+        }
+      });
+    }
+
+    function replay_sub() {
+      $("#win_alert").animate({
+        bottom: "100%"
+      }, 500, play);
+    }
+
+    function act_bot() {
+      bot_mode = 1;
+      play();
+      db.ref("pl_on/" + p_key + "/match").set("BOT");
+    }
+
+    function resize() {
+      var w = parseInt(window.innerWidth);
+      var h = parseInt(window.innerHeight);
+
+      if (w > h) {
+        $("#maincontainer").css("height", (h - 20) + "px");
+        $("#maincontainer").css("width", ((h - 20) * 17 / 31) + "px");
+      } else {
+        $("#maincontainer").css("height", "94%");
+        $("#maincontainer").css("width", "94%");
+      }
+
+
+    }
+
+    function toss_call_opp_fun() {
+      $("#toss_call_opp").show();
+      h_ref = db.ref(mat_key + "/toss/t2").on("value", function (l) {
+        if (l.val() == 0) {
+          toss_call_opp.innerHTML = "Waiting for OPPONENT...<br><hr>";
+          return;
+        } else {
+          db.ref(mat_key + "/toss/t2").off("value", h_ref);
+          if (l.val() == 1) {
+            toss_call_opp.innerHTML = op_name + " calls for HEADS<br><hr>";
+            toss_2 = 1;
+            do_toss();
+          } else {
+            toss_call_opp.innerHTML = op_name + " calls for TAILS<br><hr>";
+            toss_2 = 2;
+            do_toss();
+          }
+
+        }
+      });
+    }
+
+    function toss_head() {
+      if (toss_2 == 0) {
+        toss_2 = 1;
+        if (!bot_mode) db.ref(mat_key + "/toss/t2").set(1);
+        do_toss();
+      }
+    }
+
+    function toss_tail() {
+      if (toss_2 == 0) {
+        toss_2 = 2;
+        if (!bot_mode) db.ref(mat_key + "/toss/t2").set(2);
+        do_toss();
+      }
+    }
+
+    function do_toss() {
+      $("toss_coin_tail").hide();
+      $("#toss_coin_tail").css("transform", "rotateY(-90deg)");
+      $("#toss_coin_head").show();
+      $("#toss_coin_head").css("transform", "rotateY(-90deg)");
+      var deg = -90; var face = true;
+      var n_spin = 0;
+      var spin_int = setInterval(function () {
+        deg += 10;
+        if (face) {
+          $("#toss_coin_head").css("transform", "rotateY(" + deg + "deg)");
+        } else {
+          $("#toss_coin_tail").css("transform", "rotateY(" + deg + "deg)");
+        }
+        if (deg == 0 && n_spin == (toss_1 % 2 ? 8 : 7)) {
+          clearInterval(spin_int);
+          do_toss_callback();
+        }
+        if (deg == 90) {
+          deg = -90;
+          face = !face;
+          $("#toss_coin_head").toggle();
+          $("#toss_coin_tail").toggle();
+          n_spin++;
+        }
+      }, 20);
+    }
+
+    function do_toss_callback() {
+      var toss_win = 1;
+      if ((toss_2 == 1 && (toss_1 == 1 || toss_1 == 4)) || (toss_2 == 2 && (toss_1 == 2 || toss_1 == 3))) {
+        toss_win = 0;
+      }
+      if (p_role == toss_win) {
+        toss_res.innerHTML = "<br><hr>It's " + (toss_1 % 2 ? "Heads" : "Tails") + "...<br>YOU won the TOSS<br><hr>";
+        $("#toss_res").show();
+        $("#toss_choice").show();
+      } else {
+        toss_res.innerHTML = "<br><hr>It's " + (toss_1 % 2 ? "Heads" : "Tails") + "...<br>" + op_name + " won the TOSS<br><hr>";
+        $("#toss_res").show();
+        $("#toss_choice_opp").show();
+        if (!bot_mode) {
+          i_ref = db.ref(mat_key + "/toss/t3").on("value", function (m) {
+            if (m.val() == 0) {
+              toss_choice_opp.innerHTML = "Waiting for Opponent's choice...<hr>";
+              return;
+            } else {
+              db.ref(mat_key + "/toss/t3").off("value", i_ref);
+              if (m.val() == 1) {
+                toss_choice_opp.innerHTML = op_name + " chose to BAT<hr>";
+                flag = 2;
+                flag2 = 1;
+              } else {
+                toss_choice_opp.innerHTML = op_name + " chose to BOWL<hr>";
+                flag = 1;
+                flag1 = 1;
+              }
+              toss_alert_dismiss(2000);
+            }
+          });
+        } else {
+          if (parseInt(Math.random() * 2)) {
+            toss_choice_opp.innerHTML = op_name + " chose to BAT<hr>";
+            flag = 2;
+            flag2 = 1;
+
+          } else {
+            toss_choice_opp.innerHTML = op_name + " chose to BOWL<hr>";
+            flag = 1;
+            flag1 = 1;
+          }
+          toss_alert_dismiss(3000);
+        }
+      }
+
+    }
+
+    function toss_bat() {
+      if (flag == 0) {
+        if (!bot_mode) db.ref(mat_key + "/toss/t3").set(1);
+        flag = 1;
+        flag1 = 1;
+        toss_alert_dismiss(1000);
+      }
+    }
+
+    function toss_bowl() {
+      if (flag == 0) {
+        if (!bot_mode) db.ref(mat_key + "/toss/t3").set(2);
+        flag = 2;
+        flag2 = 1;
+        toss_alert_dismiss(1000);
+      }
+    }
+
+    function toss_alert_dismiss(x) {
+      $("#toss_alert").delay(x).animate({
+        top: "-100%"
+      }, 500, img_role);
+
+    }
+
+    function img_role() {
+      if (flag == 1) {
+        $("#run_score").css({ "border-color": "purple" });
+        $("#bat_img").css({ "left": "", "border-color": "purple" });
+        $("#bat_img").animate({ "right": "5%" }, 500);
+        $("#bowl_img").css({ "right": "", "border-color": "blue" });
+        $("#bowl_img").animate({ "left": "5%" }, 500);
+      }
+      if (flag == 2) {
+        $("#run_score").css({ "border-color": "blue" });
+        $("#bowl_img").css({ "left": "", "border-color": "purple" });
+        $("#bowl_img").animate({ "right": "5%" }, 500);
+        $("#bat_img").css({ "right": "", "border-color": "blue" });
+        $("#bat_img").animate({ "left": "5%" }, 500);
+      }
+      game_on = 1;
+    }
+
+    function inn() {
+
+      $("#inn_alert").animate({
+        bottom: "100%"
+      }, 500, function () {
+        target.innerHTML = "TARGET : " + parseInt((flag == 1 ? op_sc : my_sc) + 1);
+        rnd_cnt.innerHTML = "INNINGS: II"
+        run_score.innerHTML = "0";
+        $("#target").show();
+        img_role();
+      });
+    }
+
+    function open_friends() {
+      $("#friends_box").animate({
+        bottom: "12%"
+      }, 500);
+    }
+    function close_friends() {
+      $("#friends_box").animate({
+        bottom: "100%"
+      }, 500);
+    }
+
+    function search() {
+      var search_text = search_box.value;
+      $(".span_free").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(search_text) > -1)
+      })
+    }
+
+    function inv_acp() {
+
+      $("#inv_conf").animate({
+        bottom: "100%"
+      }, 500, function () {
+        op_name = t_val;
+        mat_key = db.ref().push().key;
+        db.ref("pl_on/" + s_val + "/match").set(mat_key);
+        db.ref("pl_on/" + p_key + "/match").set(mat_key);
+        if (p_role == 0) {
+          db.ref(mat_key).set({
+            match: {
+              p0: 0,
+              p1: 0
+            },
+            toss: {
+              t1: 0, // toss who + toss call
+              t2: 0, // toss res : head/tail
+              t3: 0, // toss choice : bat/bowl
+            }
+          });
+        }
+        p_role = 1;
+        play();
+      });
+
+    }
+
+    function inv_dec() {
+      $("#inv_conf").animate({
+        bottom: "100%"
+      }, 500);
+      db.ref("pl_on/" + s_val + "/inv_to").set(-1);
+    }
+
+    function hi_sc_show() {
+      db.ref("high_scores").once("value", function (hs) {
+        hi_sc_tbl.innerHTML = "<tr class='a'><td>#</td><td>NAME</td><td>AGAINST</td><td>SCORE</td></tr>";
+        for (var x = 0; x < 5; x++) {
+          hi_sc_tbl.innerHTML += "<tr class='b'><td>" + (parseInt(x) + 1) + "</td><td>" + hs.val()[x]['n1'] + "</td><td>" + hs.val()[x]['n2'] + "</td><td>" + hs.val()[x]['s'] + "</td></tr>";
+        }
+        $("#hi_sc_box").animate({
+          bottom: "20%"
+        }, 500);
+      });
+    }
+
+    function close_hi_sc() {
+      $("#hi_sc_box").animate({
+        bottom: "100%"
+      }, 500);
+    }
+
+    function check_hi_sc() {
+      db.ref("high_scores/4/s").once("value", function (ls) {
+        if (ls.val() <= my_sc) {
+          db.ref("high_scores").once("value", function (ks) {
+            var temp = ks.val();
+            for (var k = 3; k >= 0; k--) {
+              if (temp[k]['s'] <= my_sc) {
+                temp[k + 1] = temp[k];
+              } else break;
+            }
+
+            temp[k + 1] = {
+              'n1': name,
+              'n2': op_name,
+              's': my_sc
+            }
+            /*
+            temp[k + 1]['s'] = my_sc;
+            temp[k + 1]['n1'] = name;
+            temp[k + 1]['n2'] = op_name;
+            */
+            db.ref("high_scores").set(temp);
+
+            hi_sc_tbl.innerHTML = "<tr class='a'><td>#</td><td>NAME</td><td>AGAINST</td><td>SCORE</td></tr>";
+            for (var x = 0; x < 5; x++) {
+              hi_sc_tbl.innerHTML += "<tr class='b'><td>" + (parseInt(x) + 1) + "</td><td>" + temp[x]['n1'] + "</td><td>" + temp[x]['n2'] + "</td><td>" + temp[x]['s'] + "</td></tr>";
+            }
+
+            document.getElementsByClassName("b")[k + 1].style.fontWeight = '1000';
+            document.getElementsByClassName("b")[k + 1].style.fontStyle = 'italic';
+
+            $("#hi_sc_box").animate({
+              bottom: "20%"
+            }, 500);
+
+
+          });
+        }
+
+      });
+    }
+
+
+  </script>
+
+</body>
+
+</html>
