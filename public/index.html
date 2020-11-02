@@ -4,10 +4,8 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=windows-1252">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta
-  name="description"           
-  content="Play Hand Cricket 👍 with your FRIENDS from anywhere...">
-  
+  <meta name="description" content="Play Hand Cricket 👍 with your FRIENDS from anywhere...">
+
   <link rel="icon" href="favicon.png">
 
   <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
@@ -28,6 +26,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+
+
 
 </head>
 
@@ -156,6 +156,18 @@
 <script src="../res/firebase-database.js"></script>
 -->
   <script>
+
+    if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected. You must include it before /__/firebase/init.js');
+    firebase.initializeApp({
+      "apiKey": "AIzaSyDhdaU-RpFdhXVAAW1fLi814wa5oFFEVmU",
+      "appId": "1:731162926359:web:ddf42a23bd3fd632b4ab52",
+      "authDomain": "hand-cricket-agiapp.firebaseapp.com",
+      "databaseURL": "https://hand-cricket-agiapp.firebaseio.com",
+      "measurementId": "G-55FYC3QT1L",
+      "messagingSenderId": "731162926359",
+      "projectId": "hand-cricket-agiapp",
+      "storageBucket": "hand-cricket-agiapp.appspot.com"
+    });
 
     resize();
     var name;
