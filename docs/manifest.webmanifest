@@ -1,0 +1,16 @@
+{
+    "background_color": "lightgreen",
+    "description": "Play HandCricket with your Friends",
+    "display": "standalone",
+    "theme_color": "lightgreen",
+    "icons": [
+      {
+        "src": "res/thumbs_up(512).png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "name": "Hand-Cricket",
+    "short_name": "Hand-Cricket",
+    "start_url": "/index.html"
+  }

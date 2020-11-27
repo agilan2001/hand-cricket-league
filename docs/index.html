@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,6 +8,7 @@
   <meta name="description" content="Play Hand Cricket 👍 with your FRIENDS from anywhere...">
 
   <link rel="icon" href="favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
@@ -34,7 +35,7 @@
 
 <body>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
   <div id="maincontainer">
     <span id="hi_sc_box">
       <span id="hi_sc_close_box" onclick="close_hi_sc()">&times</span>
@@ -45,7 +46,12 @@
       <span id="name_prompt">
         <span id="prompt_tag1">Enter your NAME :</span><br><br>
         <input type="text" id="name_box"><br><br>
-        <span id="name_btn" onclick="name_enter()">That's my NAME</span>
+        <span id="name_btn" onclick="name_enter()">That's my NAME</span><br>
+        <br>
+        <small>
+          ALERT : You may be redirected to AD pages scarcely... Return BACK ... 😇🙏<br> (only 3 ADs per play)<br>
+          <small>ADs are required to continue this FREE 😅<br>🙇‍♂️🙇‍♂️🙇‍♂️</small>
+        </small>
       </span>
       <span id="inv_alert">
         <span id="alert_tag1">Waiting for Response</span><br><br>
@@ -148,16 +154,8 @@
       <img id="l5" class="an2" src="res/l5.png">
       <img id="l6" class="an2" src="res/l6.png">
     </span>
-    
-    
-  </div>
-  <div style="position: absolute;  bottom: 0;">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-gw-3+1f-3d+2z"
-    data-ad-client="ca-pub-9623039278843283" data-ad-slot="6818591035"></ins>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+
+
   </div>
 
 
@@ -169,6 +167,12 @@
 <script src="../res/firebase-database.js"></script>
 -->
   <script>
+
+    //Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    };
+
 
     if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected. You must include it before /__/firebase/init.js');
     firebase.initializeApp({
@@ -967,6 +971,9 @@
 
 
   </script>
+
+  <!--PROPELLER ADS-->
+  <script>(function (s, u, z, p) { s.src = u, s.setAttribute('data-zone', z), p.appendChild(s); })(document.createElement('script'), 'https://iclickcdn.com/tag.min.js', 3732310, document.body || document.documentElement)</script>
 
 </body>
 
