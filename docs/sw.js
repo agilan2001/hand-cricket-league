@@ -1,4 +1,4 @@
-contentToCache = ['index.html', 'style.css', 'sw.js', 'res/'];
+contentToCache = ['index.html', 'style.css', 'sw.js'];
 contentToCache.push(...(['bat', 'bowl', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6',
     'r1', 'r2', 'r3', 'r4', 'r5', 'r6',
     'message_small', 'toss_head', 'toss_tail', 'whatsapp'].map((e, i) => 'res/' + e + '.png')));
